@@ -1,8 +1,7 @@
 const express = require("express");
-const { uuid } = require("uuidv4");
+const { v4: uuid } = require('uuid');
 const cors = require("cors");
-
-// const { v4: uuid } = require('uuid');
+const { json } = require("express");
 
 const app = express();
 
@@ -15,7 +14,7 @@ const repositories = [];
  * GET /repositories: Rota que lista todos os repositórios;
  */
 app.get("/repositories", (request, response) => {
-
+  return response.json(repositories);
 });
 
 /**
@@ -29,9 +28,12 @@ app.get("/repositories", (request, response) => {
  */
 app.post("/repositories", (request, response) => {
   const { title, url, techs } = request.body;
-  const project = { id: uuid(), title, url, techs, likes: 0 };
 
-  return response.json(project);
+  const repository = { id: uuid(), title, url, techs, likes: 0 };
+
+  repositories.push(repository);
+
+  return response.json(repository);
 });
 
 /**
@@ -40,7 +42,26 @@ app.post("/repositories", (request, response) => {
  * nos parâmetros da rota;
  */
 app.put("/repositories/:id", (request, response) => {
+  const { id } = request.params;
+  const { title, url, techs } = request.body;
 
+  const repositoryIndex = repositories.findIndex(repository => repository.id === id);
+
+  if (repositoryIndex < 0) {
+    return response.status(400).json({ error: 'Project not found.' })
+  }
+
+  const repository = {
+    id,
+    title,
+    url,
+    techs,
+    likes: repositories[repositoryIndex].likes,
+  }
+
+  repositories[repositoryIndex] = repository;
+
+  return response.json(repository);
 });
 
 /**
@@ -48,7 +69,7 @@ app.put("/repositories/:id", (request, response) => {
  * id presente nos parâmetros da rota;
  */
 app.delete("/repositories/:id", (request, response) => {
-
+  
 });
 
 /**
