@@ -24,4 +24,5 @@ Essa será uma aplicação para armazenar repositórios, que irá permitir a cri
 - **`POST /repositories/:id/like`**: A rota deve aumentar o número de likes do repositório específico escolhido através do `id` presente nos parâmetros da rota, a cada chamada dessa rota, o número de likes deve ser aumentado em 1;
 
 Ao clonar o repositório, você pode iniciar o servidor com o comando `yarn dev` (Esse comando deve ser executado dentro da pasta onde o repositório foi clonado). Após isso é possível testar os métodos utilizando o Insomnia.
+
 Para iniciar os testes, execute o comando `yarn test`.
