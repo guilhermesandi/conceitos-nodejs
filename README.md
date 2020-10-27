@@ -13,6 +13,24 @@ Essa será uma aplicação para armazenar repositórios, que irá permitir a cri
 
 ## Como usar
 
+- **`POST /repositories`**: A rota recebe `title`, `url` e `techs` dentro do corpo da requisição, sendo a URL o link para o GitHub desse repositório. Ao cadastrar um novo projeto, ele é armazenado dentro de um objeto no seguinte formato: `{ id: "uuid", title: 'Desafio Node.js', url: 'http://github.com/...', techs: ["Node.js", "..."], likes: 0 }`;
+
+- **`GET /repositories`**: Rota que lista todos os repositórios;
+
+- **`PUT /repositories/:id`**: A rota altera apenas o `title`, a `url` e as `techs` do repositório que possua o `id` igual ao `id` presente nos parâmetros da rota;
+
+- **`DELETE /repositories/:id`**: A rota deleta o repositório com o `id` presente nos parâmetros da rota;
+
+- **`POST /repositories/:id/like`**: A rota aumenta o número de likes do repositório específico escolhido através do `id` presente nos parâmetros da rota, a cada chamada dessa rota, o número de likes é aumentado em 1;
+
+Ao clonar o repositório, você pode iniciar o servidor com o comando `yarn dev` (Esse comando deve ser executado dentro da pasta onde o repositório foi clonado). Após isso é possível testar as rotas utilizando o Insomnia.
+
+Para iniciar os testes, execute o comando `yarn test`.
+
+## Como praticar
+
+Apague o código de todas as rotas e tente criar você mesmo, leia como funciona cada rota abaixo:
+
 - **`POST /repositories`**: A rota deve receber `title`, `url` e `techs` dentro do corpo da requisição, sendo a URL o link para o github desse repositório. Ao cadastrar um novo projeto, ele deve ser armazenado dentro de um objeto no seguinte formato: `{ id: "uuid", title: 'Desafio Node.js', url: 'http://github.com/...', techs: ["Node.js", "..."], likes: 0 }`; Certifique-se que o ID seja um UUID, e de sempre iniciar os likes como 0.
 
 - **`GET /repositories`**: Rota que lista todos os repositórios;
@@ -22,7 +40,3 @@ Essa será uma aplicação para armazenar repositórios, que irá permitir a cri
 - **`DELETE /repositories/:id`**: A rota deve deletar o repositório com o `id` presente nos parâmetros da rota;
 
 - **`POST /repositories/:id/like`**: A rota deve aumentar o número de likes do repositório específico escolhido através do `id` presente nos parâmetros da rota, a cada chamada dessa rota, o número de likes deve ser aumentado em 1;
-
-Ao clonar o repositório, você pode iniciar o servidor com o comando `yarn dev` (Esse comando deve ser executado dentro da pasta onde o repositório foi clonado). Após isso é possível testar os métodos utilizando o Insomnia.
-
-Para iniciar os testes, execute o comando `yarn test`.
