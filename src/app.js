@@ -69,7 +69,17 @@ app.put("/repositories/:id", (request, response) => {
  * id presente nos parâmetros da rota;
  */
 app.delete("/repositories/:id", (request, response) => {
-  
+  const { id } = request.params;
+
+  const repositoryIndex = repositories.findIndex(repository => repository.id === id);
+
+  if (repositoryIndex < 0) {
+    return response.status(400).json({ error: 'Project not found.' })
+  }
+
+  repositories.splice(repositoryIndex, 1);
+
+  return response.status(204).send();
 });
 
 /**
@@ -79,7 +89,23 @@ app.delete("/repositories/:id", (request, response) => {
  * likes deve ser aumentado em 1;
  */
 app.post("/repositories/:id/like", (request, response) => {
+  const { id } = request.params;
 
+  const repositoryIndex = repositories.findIndex(repository => repository.id === id);
+
+  const currentLikes = repositories[repositoryIndex].likes + 1;
+
+  const repository = {
+    id,
+    title: repositories[repositoryIndex].title,
+    url: repositories[repositoryIndex].url,
+    techs: repositories[repositoryIndex].techs,
+    likes: currentLikes
+  }
+
+  repositories[repositoryIndex] = repository;
+
+  return response.json(repository);
 });
 
 module.exports = app;
