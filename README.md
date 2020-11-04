@@ -1,4 +1,4 @@
-<h1 align="center">Challenge 02 GoStack</h1>
+<h1 align="center">Desafio: Conceitos do Node.js | GoStack</h1>
 
 <div align="center">
 
